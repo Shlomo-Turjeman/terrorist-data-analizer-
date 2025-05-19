@@ -77,7 +77,7 @@ namespace Terrorist_data_analizer
 
 
         //יצירת מילון של כמות הנשקים מכל סוג
-        static void CreatWeaponsDict(List<Dictionary<string,object>> terrorist)
+        static void CreateWeaponsDict(List<Dictionary<string,object>> terrorist)
         {
             foreach(Dictionary<string,object> item in terrorist)
             {
@@ -101,7 +101,7 @@ namespace Terrorist_data_analizer
 
 
         //יצירת מילון של כמות החברים בכל ארגון טרור
-        static void CreatOrgDict(List<Dictionary<string, object>> terrorist)
+        static void CreateOrgDict(List<Dictionary<string, object>> terrorist)
         {
             foreach (Dictionary<string, object> item in terrorist)
             {
@@ -163,14 +163,14 @@ namespace Terrorist_data_analizer
         static string FindMinValue(Dictionary<string, double> dict)
         {
             string result = "";
-            int sumCurrent = int.MaxValue;
+            double sumCurrent = int.MaxValue;
 
             foreach (KeyValuePair<string, double> item in dict)
             {
                 if (item.Value < sumCurrent)
                 {
                     result = item.Key;
-                    sumCurrent = (int)item.Value;
+                    sumCurrent = item.Value;
                 }
             }
             return result;
@@ -189,7 +189,7 @@ namespace Terrorist_data_analizer
 
 
         //יצירת מילון מיקומים של כל טרוריסט
-        static void CreatLocationMap(List<Dictionary<string,object>> terrorist)
+        static void CreateLocationMap(List<Dictionary<string,object>> terrorist)
         {
             foreach (Dictionary<string, object> item in terrorist)
             {
@@ -211,7 +211,7 @@ namespace Terrorist_data_analizer
 
 
         //יצירת מילון של כל זוגות הטרוריסטים שקרובים אחד לשני
-        static void CreatDistanceDict(Dictionary<string, double[]> locationMap)
+        static void CreateDistanceDict(Dictionary<string, double[]> locationMap)
         {
             string name1 = "";
             string name2 = "";
@@ -225,7 +225,7 @@ namespace Terrorist_data_analizer
 
                 foreach (KeyValuePair<string, double[]> terrorist2 in locationMap)
                 {
-                    name2 = terrorist2.Key;
+                    name2 = "";
 
                     if (name1 !=  name2)
                     {
@@ -234,6 +234,7 @@ namespace Terrorist_data_analizer
                     if (tempDistance < currDistance)
                     {
                         currDistance = tempDistance;
+                        name2 = terrorist2.Key;
                     }
                 }
 
@@ -246,8 +247,8 @@ namespace Terrorist_data_analizer
         //מציאת זוג הטרוריסטים שהכי קרובים
         static void ShowClosestTerrorist()
         {
-            CreatLocationMap(peopleData);
-            CreatDistanceDict(locationMap);
+            CreateLocationMap(peopleData);
+            CreateDistanceDict(locationMap);
             string terroristNames = FindMinValue(distanceMap);
             string[] splitNames = terroristNames.Split("-");
             double minDistance = distanceMap[terroristNames];
@@ -272,9 +273,9 @@ namespace Terrorist_data_analizer
 
 
         //הדפסת התפריט
-        static void ShowMenu()
+        static void ShowMenue()
         {
-            Console.WriteLine("######Menu######\n" +
+            Console.WriteLine("######Menue######\n" +
                 "A: Find the most common weapon.\n" +
                 "B: Find the least common weapon.\n" +
                 "C: Find the organization with the most members.\n" +
@@ -313,13 +314,13 @@ namespace Terrorist_data_analizer
         static void RunMenue()
         {
             string choice = "";
-            CreatWeaponsDict(peopleData);
-            CreatOrgDict(peopleData);
+            CreateWeaponsDict(peopleData);
+            CreateOrgDict(peopleData);
 
 
             do
             {
-                ShowMenu();
+                ShowMenue();
                 choice = ValidateChoice(Console.ReadLine());
                 MakingChoice(choice);
             }
