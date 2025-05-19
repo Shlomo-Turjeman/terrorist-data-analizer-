@@ -76,6 +76,7 @@ namespace Terrorist_data_analizer
     };
 
 
+        //יצירת מילון של כמות הנשקים מכל סוג
         static void CreatWeaponsDict(List<Dictionary<string,object>> terrorist)
         {
             foreach(Dictionary<string,object> item in terrorist)
@@ -98,6 +99,8 @@ namespace Terrorist_data_analizer
             }
         }
 
+
+        //יצירת מילון של כמות החברים בכל ארגון טרור
         static void CreatOrgDict(List<Dictionary<string, object>> terrorist)
         {
             foreach (Dictionary<string, object> item in terrorist)
@@ -119,6 +122,8 @@ namespace Terrorist_data_analizer
             }
         }
 
+
+        //מציאת מקסימום במילון 
         static string FindMaxValue(Dictionary<string, int> dict)
         {
             string result = "";
@@ -135,6 +140,8 @@ namespace Terrorist_data_analizer
             return result;
         }
 
+
+        //מציאת מינימום במילון
         static string FindMinValue(Dictionary<string,int> dict)
         {
             string result = "";
@@ -151,6 +158,8 @@ namespace Terrorist_data_analizer
             return result;
         }
 
+
+        //מציאת מינימום במילון שהערכים הם מספרים מסוג דאבל
         static string FindMinValue(Dictionary<string, double> dict)
         {
             string result = "";
@@ -167,6 +176,8 @@ namespace Terrorist_data_analizer
             return result;
         }
 
+
+        //חישוב מרחק בין שני מיקומים
         static double Distance(double x1, double y1, double x2, double y2)
         {
             double latSum = x1 - x2;
@@ -176,6 +187,8 @@ namespace Terrorist_data_analizer
             return Math.Sqrt(latPow +  lonPow);
         }
 
+
+        //יצירת מילון מיקומים של כל טרוריסט
         static void CreatLocationMap(List<Dictionary<string,object>> terrorist)
         {
             foreach (Dictionary<string, object> item in terrorist)
@@ -196,6 +209,8 @@ namespace Terrorist_data_analizer
 
         }
 
+
+        //יצירת מילון של כל זוגות הטרוריסטים שקרובים אחד לשני
         static void CreatDistanceDict(Dictionary<string, double[]> locationMap)
         {
             string name1 = "";
@@ -227,6 +242,8 @@ namespace Terrorist_data_analizer
             }
         }
 
+
+        //מציאת זוג הטרוריסטים שהכי קרובים
         static void ShowClosestTerrorist()
         {
             CreatLocationMap(peopleData);
@@ -238,6 +255,8 @@ namespace Terrorist_data_analizer
             Console.WriteLine($"first terrorist: {splitNames[0]} second terrorist: {splitNames[1]} distance: {minDistance}");
         }
 
+
+        //אימות קלט
         static string ValidateChoice(string choice)
         {
             string[] options = { "a", "b", "c", "d", "e" };
@@ -252,6 +271,7 @@ namespace Terrorist_data_analizer
         }
 
 
+        //הדפסת התפריט
         static void ShowMenu()
         {
             Console.WriteLine("######Menu######\n" +
@@ -264,6 +284,8 @@ namespace Terrorist_data_analizer
                 "Enter your choice(A-E or exit): ");
         }
 
+
+        //ביצוע הפעולה שנבחרה
         static void MakingChoice(string choice)
         {
             switch(choice.ToLower())
@@ -286,6 +308,8 @@ namespace Terrorist_data_analizer
             }
         }
 
+
+        //הרצת התוכנית בלולאה
         static void RunMenue()
         {
             string choice = "";
@@ -305,6 +329,7 @@ namespace Terrorist_data_analizer
             Console.WriteLine("Closing...");
 
         }
+
 
 
         static void Main(string[] args)
