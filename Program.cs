@@ -213,28 +213,30 @@ namespace Terrorist_data_analizer
         //יצירת מילון של כל זוגות הטרוריסטים שקרובים אחד לשני
         static void CreateDistanceDict(Dictionary<string, double[]> locationMap)
         {
-            string name1 = "";
-            string name2 = "";
+            //string name1 = "";
+            //string name2 = "";
 
             foreach(KeyValuePair<string, double[]> terrorist1 in locationMap)
             {
-                name1 = terrorist1.Key;
+                string name1 = terrorist1.Key;
                 double currDistance = double.MaxValue;
                 double tempDistance = double.MaxValue;
+                string name2 = "";
+
 
 
                 foreach (KeyValuePair<string, double[]> terrorist2 in locationMap)
                 {
-                    name2 = "";
+                    string tempName = terrorist2.Key;
 
-                    if (name1 !=  name2)
+                    if (name1 !=  tempName)
                     {
                         tempDistance = Distance(terrorist1.Value[0], terrorist1.Value[1], terrorist2.Value[0], terrorist2.Value[1]);
                     }
                     if (tempDistance < currDistance)
                     {
                         currDistance = tempDistance;
-                        name2 = terrorist2.Key;
+                        name2 = tempName;
                     }
                 }
 
