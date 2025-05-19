@@ -213,8 +213,6 @@ namespace Terrorist_data_analizer
         //יצירת מילון של כל זוגות הטרוריסטים שקרובים אחד לשני
         static void CreateDistanceDict(Dictionary<string, double[]> locationMap)
         {
-            //string name1 = "";
-            //string name2 = "";
 
             foreach(KeyValuePair<string, double[]> terrorist1 in locationMap)
             {
